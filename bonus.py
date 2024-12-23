@@ -3,8 +3,12 @@ class Lista:
         self.lista = []
 
     def aggiungi(self, elemento):  # Aggiunge un elemento in fondo alla lista
-        self.lista.append(elemento)  # Aggiungo l'elemento direttamente
-        print(f"{elemento} aggiunto con successo!\n")
+        if isinstance(elemento, list):  # Se l'elemento è una lista, aggiungiamo tutti gli elementi
+            self.lista.extend(elemento)  # Usa extend per aggiungere tutti gli elementi della lista
+            print(f"Elementi {elemento} aggiunti con successo!\n")
+        else:
+            self.lista.append(elemento)  # Aggiunge un singolo elemento
+            print(f"{elemento} aggiunto con successo!\n")
         return self.lista
 
     def visualizza(self):  # Stampa la lista in ordine alfabetico
@@ -70,8 +74,15 @@ def gestisciLista(lista):  # Gestisco l'oggetto lista (importato o creato)
     azione = input("-Scrivi 'aggiungi' per aggiungere\n-Scrivi 'elimina' per eliminare un elemento\n-Scrivi 'visualizza' per vedere la lista\n-Scrivi 'salva' per salvarla\n-Scrivi 'esci' per uscire\n>>> ")
     
     if azione.lower() in ["aggiungi", "inserisci"]:
-        elemento = input("Inserisci l'elemento da aggiungere: ")
-        lista.aggiungi(elemento)
+        tipo_aggiunta = input("Vuoi aggiungere uno o più elementi? [1 - uno, 2 - più] ")
+        if tipo_aggiunta == "1":
+            elemento = input("Inserisci l'elemento da aggiungere: ")
+            lista.aggiungi(elemento)
+        elif tipo_aggiunta == "2":
+            elementi = input("Inserisci gli elementi da aggiungere, separati da virgola: ")
+            lista.aggiungi([elem.strip() for elem in elementi.split(",")])  # Aggiungi la lista di elementi
+        else:
+            print("Opzione non valida!")
         gestisciLista(lista)
     elif azione.lower() in ["elimina", "rimuovi", "cancella"]:
         elemento = input("Inserisci l'elemento da eliminare: ")
