@@ -2,7 +2,7 @@ class Lista:
     def __init__(self):
         self.lista = []
 
-    def aggiungi(self, elemento):  # Aggiunge un elemento in fondo alla lista
+    def aggiungi(self, elemento):  # Aggiunge un elemento o più elementi in fondo alla lista
         if isinstance(elemento, list):  # Se l'elemento è una lista, aggiungiamo tutti gli elementi
             self.lista.extend(elemento)  # Usa extend per aggiungere tutti gli elementi della lista
             print(f"Elementi {elemento} aggiunti con successo!\n")
